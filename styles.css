@@ -54,6 +54,17 @@ body {
 img { max-width: 100%; display: block; }
 a { text-decoration: none; color: inherit; }
 
+/* --- Keyboard focus (visible only for keyboard users, not mouse clicks) --- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+.nav__hamburger:focus-visible {
+  outline: 2px solid var(--green-light);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
 /* --- Typography --- */
 h1, h2, h3 {
   font-family: var(--font-sans);
@@ -309,7 +320,6 @@ p  { color: var(--text-muted); line-height: 1.75; }
 .hero__stats {
   display: flex;
   align-items: center;
-  gap: 0;
   flex-wrap: wrap;
   padding: 24px 32px;
   background: rgba(255,255,255,0.04);
@@ -665,11 +675,16 @@ p  { color: var(--text-muted); line-height: 1.75; }
   border-color: var(--green-light);
   background: rgba(77,222,138,0.05);
 }
+.form-group input:focus-visible,
+.form-group textarea:focus-visible {
+  outline: 2px solid var(--green-light);
+  outline-offset: 2px;
+}
 .form-group textarea { resize: vertical; min-height: 110px; }
 .form-note {
   text-align: center;
   font-size: 0.8rem;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.6);
   margin-top: 12px;
 }
 .form-success {
@@ -730,7 +745,7 @@ p  { color: var(--text-muted); line-height: 1.75; }
 }
 .footer__bottom p {
   font-size: 0.82rem;
-  color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.55);
   text-align: center;
 }
 
