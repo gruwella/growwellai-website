@@ -65,6 +65,23 @@ textarea:focus-visible,
   border-radius: 4px;
 }
 
+/* --- Skip to content (visible only when focused) --- */
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -100px;
+  z-index: 200;
+  padding: 12px 20px;
+  background: var(--green-light);
+  color: var(--dark);
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  transition: top var(--transition);
+}
+.skip-link:focus {
+  top: 16px;
+}
+
 /* --- Typography --- */
 h1, h2, h3 {
   font-family: var(--font-sans);
@@ -245,6 +262,7 @@ p  { color: var(--text-muted); line-height: 1.75; }
    ============================ */
 .hero {
   min-height: 100vh;
+  min-height: 100svh; /* avoids clipping under mobile browser chrome; vh is the fallback */
   display: flex;
   align-items: center;
   padding: 120px 0 80px;
@@ -830,3 +848,22 @@ p  { color: var(--text-muted); line-height: 1.75; }
 .fade-up-delay-1 { transition-delay: 0.1s; }
 .fade-up-delay-2 { transition-delay: 0.2s; }
 .fade-up-delay-3 { transition-delay: 0.3s; }
+
+/* ============================
+   REDUCED MOTION
+   Respect users who prefer minimal animation: kill decorative loops
+   (spin / float / pulse), reveal scroll content immediately, and stop
+   smooth scrolling.
+   ============================ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .fade-up {
+    opacity: 1;
+    transform: none;
+  }
+}

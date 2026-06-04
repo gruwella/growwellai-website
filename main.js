@@ -133,6 +133,10 @@ const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 // --- Smooth scroll for all anchor links ---
+// (CSS scroll-behavior is the fallback; this adds a fixed-nav offset and,
+// for a11y, moves keyboard focus to the target — e.g. the skip link.)
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', (e) => {
     const target = document.querySelector(anchor.getAttribute('href'));
@@ -140,7 +144,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       e.preventDefault();
       const offset = 80;
       const top = target.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top, behavior: 'smooth' });
+      window.scrollTo({ top, behavior: prefersReducedMotion.matches ? 'auto' : 'smooth' });
+
+      // Move keyboard focus to the destination so assistive tech follows along.
+      target.setAttribute('tabindex', '-1');
+      target.focus({ preventScroll: true });
     }
   });
 });
