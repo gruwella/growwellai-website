@@ -683,6 +683,11 @@ p  { color: var(--text-muted); line-height: 1.75; }
   display: none;
   margin-top: 16px;
 }
+.form-success--error {
+  background: rgba(255,107,107,0.1);
+  border-color: rgba(255,107,107,0.35);
+  color: #ff8a8a;
+}
 
 /* ============================
    FOOTER
@@ -785,6 +790,14 @@ p  { color: var(--text-muted); line-height: 1.75; }
   .hero__ctas { flex-direction: column; }
   .btn--lg { width: 100%; justify-content: center; }
   .hero__stats { width: 100%; }
+
+  /* Keep the floating "badge" cards anchored to the avatar's edges so their
+     text can never run off-screen / get clipped on narrow phones. */
+  .about__visual { min-height: 320px; }
+  .about__card { font-size: 0.78rem; padding: 10px 14px; }
+  .about__card svg { width: 16px; height: 16px; }
+  .about__card--1 { top: 0; right: 0; }
+  .about__card--2 { bottom: 10px; left: 0; }
 }
 
 /* ============================
